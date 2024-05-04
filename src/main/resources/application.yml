@@ -4,10 +4,15 @@ spring:
   cloud:
     gateway:
       routes:
+        - id:
+          uri: lb://IGSE-CORE
+          predicates:
+            - Path=/igse/core/**
         - id: igse-auth
           uri: lb://IGSE-AUTH
           predicates:
             - Path=/igse/auth/**
+
 
 server:
   port: 8080
