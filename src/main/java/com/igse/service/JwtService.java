@@ -1,9 +1,9 @@
 package com.igse.service;
+
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
@@ -28,5 +28,9 @@ public class JwtService {
 
     private Key getSignkey() {
         return Keys.hmacShaKeyFor(Decoders.BASE64.decode(SECRET));
+    }
+
+    public void validate(final String token){
+        Jwts.parserBuilder().setSigningKey(getSignkey()).build().parseClaimsJws(token);
     }
 }

@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: dev
   application:
     name: igse-gateway
   cloud:
@@ -21,6 +23,8 @@ spring:
           uri: lb://IGSE-CORE
           predicates:
             - Path=/igse/core/**
+          filters:
+            - GateWayFilter
         - id: igse-auth
           uri: lb://IGSE-AUTH
           predicates:
