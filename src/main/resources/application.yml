@@ -29,6 +29,12 @@ spring:
           uri: lb://IGSE-AUTH
           predicates:
             - Path=/igse/auth/**
+        - id: igse-payment
+          uri: lb://IGSE-PAYMENT
+          predicates:
+            - Path=/igse-payment/**
+          filters:
+            - GateWayFilter
 
 
 server:
