@@ -1,0 +1,6 @@
+igse:
+  gateway:
+    base-url:
+      igse-auth: http://localhost:6000
+      igse-core: lb://IGSE-CORE
+      igse-payment: lb://IGSE-PAYMENT

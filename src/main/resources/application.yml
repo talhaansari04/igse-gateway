@@ -1,6 +1,4 @@
 spring:
-  profiles:
-    active: dev
   application:
     name: igse-gateway
   cloud:
@@ -20,17 +18,17 @@ spring:
               - PATCH
       routes:
         - id:
-          uri: lb://IGSE-CORE
+          uri: ${igse.gateway.base-url.igse-core}
           predicates:
             - Path=/igse/core/**
           filters:
             - GateWayFilter
         - id: igse-auth
-          uri: lb://IGSE-AUTH
+          uri: ${igse.gateway.base-url.igse-auth}
           predicates:
             - Path=/igse/auth/**
         - id: igse-payment
-          uri: lb://IGSE-PAYMENT
+          uri: ${igse.gateway.base-url.igse-payment}
           predicates:
             - Path=/igse-payment/**
           filters:
@@ -46,4 +44,6 @@ eureka:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
   instance:
     preferIpAddress: true
-
+logging:
+  pattern:
+    console: "%clr(IST=){faint}%clr(%d{yyyy-MM-dd'|'HH:mm:ss, Asia/Kolkata}){faint} [%t] %clr(APP=){faint}%clr(${spring.application.name:null}){yellow} %clr(LEVEL=){faint}%clr(${LOG_LEVEL_PATTERN:%p}) %clr(CLASS=){faint}%clr(%logger{26}){cyan} %clr(X-Correlation-Id=){faint}%clr(%X{correlation-Id:-}){reverse} | %m%n%ex"
